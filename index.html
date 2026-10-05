@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whales World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0d233a;
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            height: 70px;
+            background-color: #0b3156;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .one {
+            width: 30%;
+            color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav .two {
+            width: 70%;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav .two ul {
+            display: flex;
+            list-style-type: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        nav .two a {
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+        }
+
+        nav .two a:hover {
+            color: goldenrod;
+            transition: 0.3s;
+        }
+
+        /* Header Section with Video Background */
+        header {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            padding-top: 20px;
+            overflow: hidden;
+            color: white;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header Text Layering */
+        header h1, header h2, header p, header button {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 40px;
+            padding-left: 50px;
+            color: #f8b401;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header h2 {
+            padding-left: 50px;
+            font-size: 26px;
+            color: rgb(252, 233, 115);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            padding-left: 50px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+            line-height: 1.5;
+        }
+
+        header button {
+            padding: 10px 20px;
+            margin-left: 50px;
+            border-radius: 32px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        header button a {
+            text-decoration: none;
+            color: black;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        header button:hover {
+            background-color: #0b3156;
+            transition: 0.3s;
+        }
+
+        header button:hover a {
+            color: white;
+        }
+
+        /* Filter Section */
+        .second-container {
+            width: 100%;
+        }
+
+        .second-one {
+            width: 100%;
+            padding: 20px 0;
+            background-color: #0b3156;
+            color: goldenrod;
+            text-align: center;
+        }
+
+        .second-one h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .second-button {
+            width: 100%;
+            padding: 15px 0;
+            background-color: #0b3156;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .second-button button {
+            padding: 8px 20px;
+            border-radius: 32px;
+            border: 2px solid goldenrod;
+            background: white;
+            cursor: pointer;
+        }
+
+        .second-button button a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .second-button button:hover {
+            background-color: rgb(241, 205, 112);
+            transition: 0.3s;
+        }
+
+        /* Cards Layout */
+        .page-up, .page-down {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 220px;
+            height: 280px;
+            background-color: #0b3156;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .card .image {
+            width: 100%;
+            height: 65%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card .matter {
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .card button {
+            padding: 5px 15px;
+            border-radius: 15px;
+            border: none;
+            background-color: #f8b401;
+            cursor: pointer;
+        }
+
+        .card button a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Card Image URLs */
+        .image-one { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS5OWzE9e-dVjWKmlFe41_sW3Z4lY3wqG4QrXI7N6jwQ&s=10"); }
+        .image-two { background-image: url("https://www.popsci.com/uploads/2024/02/21/humpback-whale-calf.png?auto=webp"); }
+        .image-three { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9TqWYj4izxHXPIKOj1zL6wdUF_mxFK8M9atbq-scP9w&s=10"); }
+        .image-four { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB4z-EVg7Gy0wH41g6abQ7phbiKFzQXtZaBxMDVsBJuw&s=10"); }
+        .image-five { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQupf1R_WUdgwOTaUezqlUcOWxeiEq46nwtJPmTOxhtSg&s=10"); }
+        
+        .image-six { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5kgdcCu5KoWtckPgKeiOjUFZQtbrHLn9LaywjWt5jkQ&s=10"); }
+        .image-seven { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-8cW4yhKaxZVB4penue75nQp4MjpneSs2RTggmdRSHw&s=10"); }
+        .image-eight { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFoAYRE36X5-AnTA8PVsGsv7F43ANpmQX906vhx_d1qA&s=10"); }
+        .image-nine { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxOso0EB0b7aLgSbqeLyNmNzbf6ix7QTLb6hjgf99Ceg&s=10"); }
+        .image-ten { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStTtW24JQ9RuDy8PbK0qL-Tvy1zhUjo0LSDvajBtKGaQ&s=10"); }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- Navigation -->
+        <nav>
+            <div class="one">
+                <h1>Whales World</h1>
+            </div>
+            <div class="two">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Whale species</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Conservation</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Header with Background Video -->
+        <header>
+            <video autoplay muted loop playsinline class="header-video">
+                <source src="https://video.wixstatic.com/video/760f65_a3bd1f550111455b8e9db8a8f9664670/720p/mp4/file.mp4" type="video/mp4">
+            </video>
+            <h1>WELCOME TO <br> Whales World</h1>
+            <h2>Discover the Majestic Giants <br> of Our Oceans</h2>
+            <p>This website is your complete guide to the amazing world <br>
+                of whales. Explore 40+ species, learn about their habitats, <br>
+                diets, behaviors and what we can do to protect them.</p>
+            <button type="button">
+                <a href="https://www.ifaw.org/international/journal/types-of-whales" target="_blank">Explore Whales Species <i class="fa-solid fa-arrow-right"></i></a>
+            </button>
+        </header>
+
+        <!-- Content Section -->
+        <div class="second-container">
+            <div class="second-one">
+                <h1>Meet the Whales Species</h1>
+            </div>
+            <div class="second-button">
+                <button type="button"><a href="https://en.wikipedia.org/wiki/Whale" target="_blank">All</a></button>
+                <button type="button"><a href="https://en.wikipedia.org/wiki/Baleen_whale" target="_blank">Baleen Whales</a></button>
+                <button type="button"><a href="https://en.wikipedia.org/wiki/Toothed_whale" target="_blank">Toothed Whales</a></button>
+                <button type="button"><a href="https://en.wikipedia.org/wiki/List_of_cetaceans" target="_blank">Other Families</a></button>
+            </div>
+
+            <!-- Upper Row -->
+            <div class="page-up">
+                <div class="card">
+                    <div class="image image-one"></div>
+                    <div class="matter">
+                        <h3>Blue Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Blue_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-two"></div>
+                    <div class="matter">
+                        <h3>Humpback Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Humpback_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-three"></div>
+                    <div class="matter">
+                        <h3>Fin Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Fin_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-four"></div>
+                    <div class="matter">
+                        <h3>Sperm Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Sperm_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-five"></div>
+                    <div class="matter">
+                        <h3>Orca (Killer Whales)</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Orca" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lower Row -->
+            <div class="page-down">
+                <div class="card">
+                    <div class="image image-six"></div>
+                    <div class="matter">
+                        <h3>Gray Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Gray_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-seven"></div>
+                    <div class="matter">
+                        <h3>Right Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Right_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-eight"></div>
+                    <div class="matter">
+                        <h3>Beluga Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Beluga_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-nine"></div>
+                    <div class="matter">
+                        <h3>Narwhals</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Narwhal" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="image image-ten"></div>
+                    <div class="matter">
+                        <h3>Minke Whales</h3>
+                        <button type="button"><a href="https://en.wikipedia.org/wiki/Minke_whale" target="_blank">Explore</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
